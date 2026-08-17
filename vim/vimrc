@@ -1,0 +1,17 @@
+execute pathogen#infect('bundle/{}', '~/.dotfiles/vim/bundle/{}')
+
+autocmd BufNewFile,BufRead Dockerfile* set filetype=dockerfile
+
+autocmd vimenter * colorscheme gruvbox
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+set background=dark
+
+set nu
+set mouse-=a
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+syntax on
+
