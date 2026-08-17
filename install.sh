@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+sudo apt update && sudo apt install -y fish
+
 cd "$HOME/.dotfiles"
 git submodule sync --recursive
 git submodule update --init --recursive

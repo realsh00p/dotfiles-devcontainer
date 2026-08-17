@@ -44,14 +44,3 @@ if test -d ~/.dotfiles/bin
   set -gx PATH ~/.dotfiles/bin $PATH
 end
 
-
-set -gx TOKEN (cat "$HOME/.git-credentials" | grep traton | cut -d ":" -f3 | cut -d "@" -f1 | tr -d '\n')
-set -gx CONAN_PASSWORD $TOKEN
-set -gx GITLAB_PRIVATE_TOKEN $TOKEN
-
-if status is-interactive
-    if not set -q SSH_AUTH_SOCK
-        eval (ssh-agent -c)
-    end
-    ssh-add ~/.ssh/id_rsa
-end
