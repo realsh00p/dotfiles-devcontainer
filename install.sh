@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+sudo apt update && \
+sudo apt install -y npm bubblewrap && \
+sudo npm install -g @openai/codex
+
 cd "$HOME/.dotfiles"
 git submodule sync --recursive
 git submodule update --init --recursive
