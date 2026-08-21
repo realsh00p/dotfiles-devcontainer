@@ -2,8 +2,23 @@
 set -e
 
 sudo apt update && \
-sudo apt install -y npm bubblewrap curl && \
-sudo npm install -g @openai/codex
+sudo apt install -y bubblewrap curl
+
+nvm_version="0.40.6"
+node_version="24.19.0"
+npm_version="11.9.0"
+codex_version="0.147.0"
+
+export NVM_DIR="$HOME/.nvm"
+curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/v${nvm_version}/install.sh" | bash
+# shellcheck source=/dev/null
+. "$NVM_DIR/nvm.sh"
+
+nvm install "$node_version"
+nvm alias default "$node_version"
+nvm use "$node_version"
+npm install --global "npm@${npm_version}"
+npm install --global "@openai/codex@${codex_version}"
 
 cd "$HOME/.dotfiles"
 git submodule sync --recursive
