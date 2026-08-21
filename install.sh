@@ -3,6 +3,7 @@ set -e
 
 sudo apt update && \
 sudo apt install -y bubblewrap ca-certificates curl
+sudo update-ca-certificates
 
 nvm_version="0.40.6"
 node_version="24.19.0"
