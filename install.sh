@@ -2,7 +2,7 @@
 set -e
 
 sudo apt update && \
-sudo apt install -y bubblewrap curl
+sudo apt install -y bubblewrap ca-certificates curl
 
 nvm_version="0.40.6"
 node_version="24.19.0"
@@ -10,7 +10,14 @@ npm_version="11.9.0"
 codex_version="0.147.0"
 
 export NVM_DIR="$HOME/.nvm"
-curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/v${nvm_version}/install.sh" | bash
+if [ -d "$NVM_DIR/.git" ]; then
+    git -C "$NVM_DIR" fetch --depth 1 --force origin \
+        "refs/tags/v${nvm_version}:refs/tags/v${nvm_version}"
+    git -C "$NVM_DIR" checkout --detach "v${nvm_version}"
+else
+    git clone --depth 1 --branch "v${nvm_version}" --single-branch \
+        https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+fi
 # shellcheck source=/dev/null
 . "$NVM_DIR/nvm.sh"
 
